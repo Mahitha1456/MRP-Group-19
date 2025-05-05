@@ -1,38 +1,120 @@
 # MRP-Group-19
+
 # Employee Salary Prediction
 
 Employee salary prediction involves determining an employee's salary level based on various personal and organizational factors. This analysis helps organizations understand the factors influencing salary levels and enables better decision-making.
 
-Use Cases for Salary Prediction:
 
-Compensation Benchmarking: Organizations can compare salaries across various departments and positions to ensure fairness and competitiveness.
-Budget Forecasting: Helps organizations allocate funds more effectively by understanding the distribution of salaries.
-Career Path Analysis: Identifies the potential salary growth associated with different career paths, assisting in strategic planning.
-In this analysis, the goal is to predict the salary level of an employee based on features like performance evaluation scores, work experience, department, and past promotion.
+## 📚 Table of Contents
 
-**Table of Contents:**
-1. Project Description
-2. Import Library dataset
-3. Usage
-4. Features
-5. Dashboard
-6. Contributing
-7. License
+1. Use Cases for Salary Prediction
+2. Project Description
+3. Tools & Technologies
+4. Dataset Overview
+5. How It Works
+6. Installation / Setup
+7. Import Required Libraries
+8. Usage
+9. Features
+10. ROC Curve Example
+11. Power BI Integration
+12. Dashboard Highlights
+13. Contributing
+14. License
 
-**Project Description** Our project aims to predict employee salaries using machine learning techniques. The model is trained on an HR dataset and treats salary as an ordinal variable. The project also shows a graphical user interface (GUI) for user interaction and a dashboard for data visualization.
+## 🔍 Use Cases for Salary Prediction
 
-**Installation / Setup**
+* **Compensation Benchmarking**: Compare salaries across departments and roles to ensure fairness.
+* **Budget Forecasting**: Support better financial planning by analyzing salary distributions.
+* **Career Path Analysis**: Identify salary growth trends tied to performance and promotions.
 
-Clone the repository:
-git clone https://github.com/yourusername/employee-salary-prediction.git
+---
+
+## 📊 Project Description
+
+Our project aims to predict employee salaries using machine learning techniques. The model is trained on an HR dataset and treats salary as an ordinal variable. The solution also includes:
+
+* Python scripts for data preprocessing and prediction.
+* A graphical user interface (GUI) for user input.
+* A Power BI dashboard for data visualization.
+
+---
+
+## 🛠️ Tools & Technologies
+
+* **Programming**: Python (Pandas, Scikit-learn, Joblib)
+* **Machine Learning Model**: Random Forest Classifier
+* **Visualization**: Power BI & Figma
+* **Preprocessing**: Label Encoding, Standardization
+
+---
+
+## 📁 Dataset Overview
+
+* **Input**: `HR_dataset.csv`
+
+  * Features:
+
+    * Satisfaction Level
+    * Last Evaluation
+    * Number of Projects
+    * Average Monthly Hours
+    * Department
+    * Promotion in the Last 5 Years
+    * Salary (categorical target)
+
+* **Output**:
+
+  * `updated_salary_predictions.csv`
+  * `HR_sample_profile_updated.csv`
+  * Contains a new column: `predicted_salary`
+
+---
+
+## 🚀 How It Works
+
+1. **Data Preprocessing**
+
+   * Handle missing values
+   * Encode categorical columns
+   * Scale numerical data
+
+2. **Model Training**
+
+   * Random Forest Classifier
+   * Evaluate performance using accuracy and classification metrics
+
+3. **Salary Prediction**
+
+   * Predict salary categories for all employees
+   * Add `predicted_salary` to the dataset
+
+4. **Export and Visualize**
+
+   * Save updated dataset as `.csv`
+   * Import into Power BI for interactive analysis
+
+The core Python code used in this project is provided in the following notebook:
+
+▶️ **[Project-Predection of employee salaries.py-.ipynb]( *
+
+---
+
+## ⚙️ Installation / Setup
+
+```bash
+git clone <repository-url>
 cd employee-salary-prediction
-Create and activate a virtual environment:
 python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-Install dependencies:
+source venv/bin/activate  # For Windows: venv\Scripts\activate
 pip install -r requirements.txt
+```
 
-**Import Library dataset** 
+---
+
+## 📚 Import Required Libraries
+
+```python
 pip install joblib
 
 import numpy as np
@@ -41,58 +123,116 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
 
-df = pd.read_csv('dataset.csv')
+# Load data
+df = pd.read_csv('HR_dataset.csv')
 df.head()
+```
 
-**Usage**
-Run the salary prediction script:
-python main.py
+---
 
-Use the GUI to input employee details and view the predicted salary category.
+## ⚡ Usage
 
-**Project structure**
-**Features**
-Predicts employee salaries based on multiple attributes.
-GUI for easy interaction.
-Data visualization dashboard.
-Supports salary classification as an ordinal variable.
+To run the prediction pipeline:
 
-**ROC Curve**
+```bash
+python generate_updated_dataset.py
+```
+
+To use the GUI:
+
+* Launch the GUI file (if implemented)
+* Input employee details
+* View predicted salary category
+
+---
+
+## ✨ Features
+
+* Predict employee salary levels
+* GUI for interaction (optional)
+* Dynamic Power BI dashboard
+* Classification based on multiple HR attributes
+
+---
+
+## 🔍 ROC Curve Example
+
+```python
 from sklearn.metrics import roc_auc_score, roc_curve
 import matplotlib.pyplot as plt
-# Logistic Regression
-logit_roc_auc = roc_auc_score(y_test, model_logistic.predict_proba(X_test), multi_class='ovr')
-fpr, tpr, thresholds = roc_curve(y_test, model_logistic.predict_proba(X_test)[:, 1], pos_label=1)
-# Random Forest
-rf_roc_auc = roc_auc_score(y_test, model_rf.predict_proba(X_test), multi_class='ovr')
-rf_fpr, rf_tpr, rf_thresholds = roc_curve(y_test, model_rf.predict_proba(X_test)[:, 1], pos_label=1)
 
-# Plot ROC Curves
+logit_roc_auc = roc_auc_score(y_test, model_logistic.predict_proba(X_test), multi_class='ovr')
+fpr, tpr, _ = roc_curve(y_test, model_logistic.predict_proba(X_test)[:, 1], pos_label=1)
+
+rf_roc_auc = roc_auc_score(y_test, model_rf.predict_proba(X_test), multi_class='ovr')
+rf_fpr, rf_tpr, _ = roc_curve(y_test, model_rf.predict_proba(X_test)[:, 1], pos_label=1)
+
 plt.figure()
 plt.plot(fpr, tpr, label='Logistic Regression (area = %0.2f)' % logit_roc_auc)
 plt.plot(rf_fpr, rf_tpr, label='Random Forest (area = %0.2f)' % rf_roc_auc)
 plt.plot([0, 1], [0, 1], 'r--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
-plt.title('Receiver Operating Characteristic')
+plt.title('ROC Curve')
 plt.legend(loc="lower right")
 plt.show()
+```
 
-![image](https://github.com/user-attachments/assets/067eedcf-df2a-48bc-b104-a832b5974571)
+---
+
+## 📈 Power BI Integration
+
+Power BI plays a crucial role in our project by turning the predictions and employee data into actionable insights. The updated dataset generated from our Python code was loaded into Power BI to build an interactive and dynamic dashboard. Key features of the Power BI integration include:
+
+* **Dynamic Filtering**: Users can filter results by promotion status, satisfaction level, predicted salary, and department.
+* **Real-Time Analysis**: HR managers can interact with visuals to instantly explore trends in salary, promotion, and employee workload.
+* **Visual Representation**: Graphical analysis helps in understanding workforce patterns and making decisions on compensation and career planning.
+
+The Power BI file used is:
+
+* 🔗 [Prediction of salaries Python code.pbix](./Prediction%20of%20salaries%20Python%20code.pbix)
+
+---
+
+## 📊 Dashboard Highlights
+
+* **Filters**:
+
+  * Promotion Status
+  * Predicted Salary Range
+  * Satisfaction Level
+
+* **Visuals**:
+
+  * Pie Chart: Promotions by Salary
+  * Bar Chart: Satisfaction by Salary
+  * Scatter Plot: Monthly Hours vs Salary
+  * Donut Chart: Turnover by Department
+
+* **Power BI File**: [Prediction of salaries Python code.pbix](./Prediction%20of%20salaries%20Python%20code.pbix)
+
+* **Figma Prototype**: [Figma Dashboard](https://www.figma.com/design/Buw5I1UcFNjnnVjvszxyk1/Untitled?node-id=0-1&p=f&t=musI23SXBkoxHrsf-0)
+
+* **Figma File**: [Employee\_Salary\_Dashboard.fig](./Employee_Salary_Dashboard.fig)
+
+---
+
+## 💡 Contributing
+
+Pull requests are welcome! For major changes, open an issue first to discuss your proposed changes.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**. You are free to use, modify, and distribute this software with proper attribution.
+
+ 
 
 
-**Dashboard**
-This is our interactive dashboard: 
-https://www.figma.com/design/Buw5I1UcFNjnnVjvszxyk1/Untitled?node-id=0-1&p=f&t=musI23SXBkoxHrsf-0
 
-[image](https://github.com/user-attachments/assets/c1c8283e-4d3a-4607-b42e-0a28654ed36d)
 
-**Contributing**
-Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to modify.
 
-**License**
-This project is licensed under the MIT License. You are free to use, modify, and distribute this software with proper attribution. See the LICENSE file for details.
+
 
 
