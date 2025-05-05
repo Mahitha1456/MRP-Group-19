@@ -96,7 +96,7 @@ Our project aims to predict employee salaries using machine learning techniques.
 
 The core Python code used in this project is provided in the following notebook:
 
-▶️ **[Project-Predection of employee salaries.py-.ipynb]( *
+▶️ **[Project-Predection of employee salaries.py-.ipynb]( https://github.com/Mahitha1456/MRP-Group-19/blob/main/Prediction%20of%20salaries%20Python%20code.pbix)
 
 ---
 
@@ -190,7 +190,7 @@ Power BI plays a crucial role in our project by turning the predictions and empl
 
 The Power BI file used is:
 
-* 🔗 [Prediction of salaries Python code.pbix](./Prediction%20of%20salaries%20Python%20code.pbix)
+* 🔗 [Prediction of salaries Python code.pbix](https://github.com/Mahitha1456/MRP-Group-19/blob/main/Prediction%20of%20salaries%20Python%20code.pbix)
 
 ---
 
